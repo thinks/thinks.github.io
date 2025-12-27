@@ -550,6 +550,34 @@
     </tr>
   </table>
 
+  <h3>Procedural Smoke</h3>
+  <p>
+    Smoke is an extremely complex phenomenon to simulate accurately, as realistic motion requires 
+    solving the Navier–Stokes equations governing fluid flow. In this implementation, a simplified 
+    approach is taken by using 4D vertex noise to displace particles within a vertex shader. While 
+    this method does not capture physically accurate smoke dynamics, it is straightforward to 
+    implement and produces visually pleasing still images.
+  </p>
+  <p>
+    The resulting motion is limited by the absence of a true physical simulation. Additionally, 
+    the noise implementation relies on very small lookup tables, as these must reside in vertex 
+    processor registers; texture memory access was not available from vertex shaders on the target 
+    graphics hardware. Particles are rendered using GL_POINT_SPRITE_ARB, which generates textured 
+    billboards automatically in hardware.
+  </p>
+  <p>
+    <a href="docs/proceduralsmokeparticlesystem.pdf" target="_blank" rel="noopener">report [.pdf]</a>
+  </p>
+  <table style="margin:auto; border-collapse: separate; border-spacing: 20px;">
+    <tr>
+      <td style="text-align:center;">
+        <a href="images/smoke.png" target="_blank" rel="noopener">
+          <img src="images/smoke.png" alt="" style="width:200px; height:auto;">
+        </a>
+      </td>
+    </tr>
+  </table>
+  
   <hr style="border:none; border-top:1px solid #ccc; margin:2rem 0;">
 
 </body>
