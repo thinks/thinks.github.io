@@ -235,22 +235,28 @@
   <h3>Single-pass Wireframe Rendering</h3>
   <!-- <img src="images/wireframe_banner.png" style="max-width:100%; height:auto;"> -->
   <p>
-    Wireframe rendering is normally done in two passes; the first renders the filled triangles and the second renders the lines, 
-    using the depth buffer from the first pass to remove hidden lines. Not only does this involve passing the geometry twice to 
-    the graphics card, there are issues with depth testing for the lines due to slight differences in rasterization techniques 
-    between lines and triangles. These differences result in rendering artefacts and there is no good way to resolve this. In 
-    2006 a new technique was proposed in a SIGGRAPH sketch entitled 
-    <a href="docs/2006_single-pass_wireframe_rendering.pdf" target="_blank" rel="noopener">Single-pass Wireframe Rendering</a>. The technique uses a 
-    pair of shaders to render triangles and lines in a single pass. Not only does this overcome rasterization issues, it is also faster 
-    and produces smooth results. The main idea is to compute the distances from fragments to triangle edges. If a fragment is 
-    within a threshold distance (half the line width) from a triangle edge, the fragment is rendered with the line color, 
-    otherwise it is rendered with the triangle color. A smoothing function is applied at the boundary between triangle and line 
-    to remedy aliasing artefacts. Most of the work is done in a vertex shader, where the distances to all triangle vertices are 
-    computed in viewport space. It is these (interpolated) distances that are the input to the fragment shader. A more robust 
-    implementation, using geometry shaders, has been proposed by <a href="docs/nvidia_solid_wireframe.pdf" target="_blank" rel="noopener">NVIDIA</a>. 
-    Their implementation deals with some tricky cases 
-    related to primitives having one or more vertices outside the viewing frustum and further reduces the amount of data sent 
-    to the graphics card.  
+    Wireframe rendering is traditionally performed in two passes: the first pass renders filled triangles, and the 
+    second renders line primitives, using the depth buffer from the first pass to eliminate hidden lines. This 
+    approach not only requires submitting geometry to the GPU twice, but also suffers from depth-testing issues 
+    caused by subtle differences in rasterization between lines and triangles. These discrepancies often lead to 
+    rendering artifacts for which there is no robust solution.
+  </p>
+  <p>
+    In 2006, a new technique was introduced in a SIGGRAPH sketch titled 
+    <a href="docs/2006_single-pass_wireframe_rendering.pdf" target="_blank" rel="noopener">Single-Pass Wireframe Rendering</a>. 
+    This method employs a pair of shaders to render both triangles and wireframe edges in a single pass. In addition to 
+    resolving rasterization inconsistencies, the technique is more efficient and produces smoother visual results. The core idea 
+    is to compute the distance from each fragment to the edges of its corresponding triangle. If a fragment lies within 
+    a specified threshold—typically half the desired line width—it is shaded with the line color; otherwise, it is shaded 
+    with the triangle color. To mitigate aliasing, a smoothing function is applied at the transition between line and fill 
+    regions.
+  </p>
+  <p>
+    Most of the computation occurs in the vertex shader, where distances to all triangle edges are calculated in viewport 
+    space. These values are then interpolated across the primitive and evaluated in the fragment shader. A more robust 
+    variant of this approach, based on geometry shaders, has since been proposed by <a href="docs/nvidia_solid_wireframe.pdf" target="_blank" rel="noopener">NVIDIA</a>. 
+    Their implementation addresses edge cases involving primitives with vertices outside the view frustum and further 
+    reduces the amount of data sent to the GPU.    
   </p>
   <table style="margin:auto; border-collapse: separate; border-spacing: 20px;">
     <tr>
@@ -270,7 +276,6 @@
         </a>
       </td>
     </tr>
-
     <tr>
       <td style="text-align:center;">
         <a href="images/wireframe_dragon3.png" target="_blank" rel="noopener">
@@ -292,12 +297,14 @@
 
   <h3>GPU Smoke Rendering</h3>
   <p>
-    Volumetric effects, such as smoke, are difficult to capture with standard rasterization techniques because light 
-    interacts with volumes rather than surfaces. This real-time renderer was written for Naiad Studio and uses a volume 
-    rendering approach based on camera-aligned proxy geometry and shaders. This method is well explained in 
-    <a href="https://developer.nvidia.com/gpugems/gpugems/part-vi-beyond-triangles/chapter-39-volume-rendering-techniques" target="_blank" rel="noopener">GPU Gems</a>. 
-    Lighting equations are integrated by rendering proxy geometry in multiple passes, storing accumulated light in a 
-    view buffer, while simultaneously accumulating visibility from a light source.  
+    Volumetric effects, such as smoke, are challenging to represent using standard rasterization techniques because 
+    light interacts with participating media rather than with surfaces. This real-time renderer was developed for 
+    Naiad Studio and employs a volume-rendering approach based on camera-aligned proxy geometry and GPU shaders. 
+    The technique is described in detail in <i>GPU Gems</i> (<a href="https://developer.nvidia.com/gpugems/gpugems/part-vi-beyond-triangles/chapter-39-volume-rendering-techniques" target="_blank" rel="noopener">Chapter 39</a> 
+    on volume rendering techniques).
+  </p>
+  <p>
+    Lighting is evaluated by integrating the illumination equations through multiple rendering passes of the proxy geometry. During this process, accumulated light is stored in a view buffer while visibility from the light source is computed simultaneously. This approach enables efficient real-time rendering of complex volumetric lighting effects.    
   </p>
   <table style="margin:auto; border-collapse: separate; border-spacing: 20px;">
     <tr>
@@ -321,17 +328,23 @@
 
   <h3>GPU Isosurface Rendering</h3>
   <p>
-    Isosurfaces are ubiquitous in computer graphics, especially in applications where geometry undergoes significant 
-    topological change over time. Level sets are a special type of isosurface where the volumetric data is a 
-    Euclidean distance field. Fluid simulations often use level sets to track the fluid surfaces over time, using 
-    the distance zero-crossing to represent interfaces. This real-time renderer was written for Naiad Studio and 
-    uses a volume rendering approach based on camera-aligned proxy geometry and shaders. This method is well explained 
-    in <a href="https://developer.nvidia.com/gpugems/gpugems/part-vi-beyond-triangles/chapter-39-volume-rendering-techniques" target="_blank" rel="noopener">GPU Gems</a>. 
-    Volume data is stored as a 3D texture on the GPU and the fragments generated from the proxy geometry 
-    are used as sampling locations into this texture. This approach has several advantages over methods that extract 
-    explicit geometry from volumetric data (e.g. Marching Cubes). The distance field is shown “as is”, avoiding 
-    artefacts caused by super-imposed structures. Per-pixel shading is inherently provided and it becomes trivial 
-    to render any isovalue without additional setup.  
+    Isosurfaces are ubiquitous in computer graphics, particularly in applications where geometry undergoes 
+    significant topological changes over time. Level sets are a specific class of isosurfaces in which the 
+    volumetric data represents a Euclidean distance field. In fluid simulations, level sets are commonly used 
+    to track evolving fluid surfaces, with the zero-crossing of the distance field defining the interface.
+  </p>
+  <p>
+    This real-time renderer was developed for Naiad Studio and employs a volume-rendering approach based on 
+    camera-aligned proxy geometry and GPU shaders. The technique is described in detail in <i>GPU Gems</i> 
+    (see <a href="https://developer.nvidia.com/gpugems/gpugems/part-vi-beyond-triangles/chapter-39-volume-rendering-techniques" target="_blank" rel="noopener">Chapter 39</a> 
+    on volume rendering techniques). Volume data is stored as a 3D texture on the GPU, 
+    and the fragments generated by the proxy geometry serve as sampling locations within this texture.
+  </p>
+  <p>
+    Compared to methods that extract explicit geometry from volumetric data, such as Marching Cubes, this 
+    approach offers several advantages. The distance field is rendered directly, avoiding artifacts introduced 
+    by superimposed polygonal structures. Per-pixel shading is inherently supported, and arbitrary isovalues 
+    can be rendered trivially without additional preprocessing or setup.
   </p>
   <table style="margin:auto; border-collapse: separate; border-spacing: 20px;">
     <tr>
