@@ -35,11 +35,23 @@
   <img src="images/phd_banner2.png"
      style="max-width:100%; height:auto;">  
   <p>
-    My PhD studies focused on the acquisition and processing of high resolution Aerial Laser Scanning (ALS) data sets. In particular, processing task such as building extraction and modeling for urban areas were studied.
+    My PhD studies focused on the acquisition and processing of high resolution Aerial Laser Scanning (ALS) data sets. 
+    In particular, processing task such as building extraction and modeling for urban areas were studied.
   </p>
   <h3>Abstract</h3>
   <p>
-    Current Aerial Laser Scanning (ALS) technology rapidly produces large amounts of accurate point data for urban regions, making it a suitable tool for city-scale geometric modeling of buildings. However, acquisition and processing of urban ALS data remains a challenge because of the geometric complexity of urban scenes. Existing techniques have focused on geometric modeling from elevation data, ignoring details on building walls. This thesis introduces several improvements and simplifications for the acquisition and processing of ALS data: urban flight path planning, scan line analysis, visualization, building extraction, and simple and robust conversion of ALS data into solid models for further processing. By applying geometric reasoning, it is shown that certain flight paths vastly improve the point data quality on building walls. Single scan line analysis then exploits latent information in the data to insert missing echoes caused by undetected pulse reflections, and to identify building wall segments in individual scan lines. Points on building wall segments are then transferred to a digital image and complete building footprints are then extracted using innovative morphological techniques. Finally, a simple and robust method for direct conversion of point data into solid models based on volumetric subdivision rather than surface reconstruction is presented.
+    Current Aerial Laser Scanning (ALS) technology rapidly produces large amounts of accurate point data for urban regions, 
+    making it a suitable tool for city-scale geometric modeling of buildings. However, acquisition and processing of urban 
+    ALS data remains a challenge because of the geometric complexity of urban scenes. Existing techniques have focused on 
+    geometric modeling from elevation data, ignoring details on building walls. This thesis introduces several improvements 
+    and simplifications for the acquisition and processing of ALS data: urban flight path planning, scan line analysis, 
+    visualization, building extraction, and simple and robust conversion of ALS data into solid models for further processing. 
+    By applying geometric reasoning, it is shown that certain flight paths vastly improve the point data quality on building walls. 
+    Single scan line analysis then exploits latent information in the data to insert missing echoes caused by undetected pulse 
+    reflections, and to identify building wall segments in individual scan lines. Points on building wall segments are then 
+    transferred to a digital image and complete building footprints are then extracted using innovative morphological techniques. 
+    Finally, a simple and robust method for direct conversion of point data into solid models based on volumetric subdivision 
+    rather than surface reconstruction is presented.
   </p>
   <p>
     <a href="docs/thinks-thesis-single.pdf" target="_blank" rel="noopener">thesis [.pdf]</a> | <a href="docs/viva_thinks.pdf" target="_blank" rel="noopener">presentation [.pdf]</a>
@@ -75,14 +87,20 @@
   <img src="images/snow_feldman3.png"
      style="max-width:600px; height:auto;">  
   <p>
-    My master thesis focused on modeling snow buildup using implicit surfaces (more specifically level sets) by allowing snow to fall in a wind field. Level sets are propagated according to snow particle collisions, with constraints to mimic realistic buildup.
+    My master thesis focused on modeling snow buildup using implicit surfaces (more specifically level sets) by allowing snow to fall 
+    in a wind field. Level sets are propagated according to snow particle collisions, with constraints to mimic realistic buildup.
   </p>
   <p>
     <a href="docs/tommyfinalthesis.pdf" target="_blank" rel="noopener">thesis [.pdf]</a>
   </p>  
   <h3>Abstract</h3>
   <p>
-    We present a physically-based snow modeling approach that handles geometrically complex scenes and arbitrary amounts of accumulated snow. Scene objects are represented with a novel dual level set structure. This implicit surface representation produces smooth snow surfaces that adhere to granular stability constraints at every timestep. Realistic accumulation patterns are achieved by tracing snow-carrying particles in a dynamic wind-field and on the surfaces of objects. Local level set operations are used to deposit snow at surface locations for which accumulation is physically plausible. The effectiveness of our method is demonstrated by applying our method to a number of challenging scenes.
+    We present a physically-based snow modeling approach that handles geometrically complex scenes and arbitrary amounts of accumulated snow. 
+    Scene objects are represented with a novel dual level set structure. This implicit surface representation produces smooth snow surfaces 
+    that adhere to granular stability constraints at every timestep. Realistic accumulation patterns are achieved by tracing snow-carrying 
+    particles in a dynamic wind-field and on the surfaces of objects. Local level set operations are used to deposit snow at surface locations 
+    for which accumulation is physically plausible. The effectiveness of our method is demonstrated by applying our method to a number of 
+    challenging scenes.
   </p>
   <h3>Paper</h3>
   <p>
@@ -271,7 +289,8 @@
   <p>
     Most of the computation occurs in the vertex shader, where distances to all triangle edges are calculated in viewport 
     space. These values are then interpolated across the primitive and evaluated in the fragment shader. A more robust 
-    variant of this approach, based on geometry shaders, has since been proposed by <a href="docs/nvidia_solid_wireframe.pdf" target="_blank" rel="noopener">NVIDIA</a>. 
+    variant of this approach, based on geometry shaders, has since been proposed by 
+    <a href="docs/nvidia_solid_wireframe.pdf" target="_blank" rel="noopener">NVIDIA</a>. 
     Their implementation addresses edge cases involving primitives with vertices outside the view frustum and further 
     reduces the amount of data sent to the GPU.    
   </p>
@@ -424,9 +443,9 @@
   <p>
     Famous rockband <a href="https://www.radiohead.com" target="_blank" rel="noopener">Radiohead</a> generously 
     released the data captured during the making of the video for their single 
-    <a href="https://open.spotify.com/track/48X4D1FYOShPz2VF3YdfCF?si=6ac06c8fc86c4059" target="_blank" rel="noopener">House of Cards</a>. The data consists of 
-    several thousand frames of real-time laser scan data of singer Thom Yorke's face. A few frames are shown below. 
-    Two levels of voxelization, rendered in different colors, are overlaid and rendered with depth-of-field and 
+    <a href="https://open.spotify.com/track/48X4D1FYOShPz2VF3YdfCF?si=6ac06c8fc86c4059" target="_blank" rel="noopener">House of Cards</a>. 
+    The data consists of several thousand frames of real-time laser scan data of singer Thom Yorke's face. A few frames are 
+    shown below. Two levels of voxelization, rendered in different colors, are overlaid and rendered with depth-of-field and 
     motion blur. Finally, the images were post-processed to remove some saturation from the green and blue channels.
   </p>
   <table style="margin:auto; border-collapse: separate; border-spacing: 20px;">
@@ -460,12 +479,11 @@
   </p>
   <p>
     Despite its advantages, the model is not without shortcomings, and a 
-    <a href="docs/2007_a_critical_review_of_the_preetham_skylight_model.pdf" target="_blank" rel="noopener">rigorous critique</a> has been published in 
-    recent years. Nevertheless, the Preetham sky model remains well suited for generating visually pleasing sky 
-    backgrounds in computer graphics, particularly when compared to simpler alternatives such as constant colors 
-    or linear gradients. A primary alternative is capturing panoramic photographs of real skies, but this approach 
-    requires costly equipment, is time-consuming, and produces only static lighting snapshots that cannot be 
-    animated over time.
+    <a href="docs/2007_a_critical_review_of_the_preetham_skylight_model.pdf" target="_blank" rel="noopener">rigorous critique</a> 
+    has been published in recent years. Nevertheless, the Preetham sky model remains well suited for generating visually 
+    pleasing sky backgrounds in computer graphics, particularly when compared to simpler alternatives such as constant 
+    colors or linear gradients. A primary alternative is capturing panoramic photographs of real skies, but this approach 
+    requires costly equipment, is time-consuming, and produces only static lighting snapshots that cannot be animated over time.
   </p>
   <p>
     This implementation could be further improved by incorporating physically based glare effects and an 
@@ -530,8 +548,8 @@
 
   <h3>Moon Lander 3D</h3>
   <p>
-    User input controls the moon lander’s five thrusters, which are visualized using simple particle systems. 
-    An inertial model governs the lander’s rotation and translation. The primary remaining challenge was 
+    User input controls the moon lander's five thrusters, which are visualized using simple particle systems. 
+    An inertial model governs the lander's rotation and translation. The primary remaining challenge was 
     determining how to correctly distribute thruster forces between rotational and translational motion. 
     For this project, a simple, pragmatic solution was chosen, optimized to “feel” right rather than to be 
     physically exact.
@@ -553,7 +571,7 @@
   <h3>Procedural Smoke</h3>
   <p>
     Smoke is an extremely complex phenomenon to simulate accurately, as realistic motion requires 
-    solving the Navier–Stokes equations governing fluid flow. In this implementation, a simplified 
+    solving the Navier-Stokes equations governing fluid flow. In this implementation, a simplified 
     approach is taken by using 4D vertex noise to displace particles within a vertex shader. While 
     this method does not capture physically accurate smoke dynamics, it is straightforward to 
     implement and produces visually pleasing still images.
